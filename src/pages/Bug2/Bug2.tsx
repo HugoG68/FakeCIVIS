@@ -86,10 +86,6 @@ const Polls: React.FC = () => {
       return {
         ...poll,
         votes: {
-          ...poll.votes,
-          [type.toLowerCase()]: poll.votes[type.toLowerCase() as keyof typeof poll.votes]
-        },
-        votes: {
             yes: poll.votes.yes + (invertedType === 'YES' ? 1 : 0),
             no: poll.votes.no + (invertedType === 'NO' ? 1 : 0),
             neutral: poll.votes.neutral + (invertedType === 'NEUTRAL' ? 1 : 0),
