@@ -85,11 +85,11 @@ function Bug1() {
           ))}
           <div className={styles.ground} aria-hidden="true" />
         </div>
-        <h1 className={styles.title}>Aucun acces a Internet</h1>
+        <h1 className={styles.title}>Aucun accès à internet</h1>
         <p className={styles.subtitle}>Voici quelques conseils :</p>
         <ul className={styles.list}>
-          <li>Verifiez les cables reseau, le modem et le routeur.</li>
-          <li>Reconnectez-vous au reseau Wi-Fi</li>
+          <li>Éteignez votre ordinateur</li>
+          <li>Vérifier qu'il n'y a pas d'intrus sur votre réseau</li>
         </ul>
         <p className={styles.errorCode}>ERR_INTERNET_DISCONNECTED</p>
       </div>
