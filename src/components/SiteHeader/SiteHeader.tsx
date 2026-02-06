@@ -9,6 +9,7 @@ const navLinks = [
   { to: '/bug1', label: 'Avis' },
   { to: '/bug2', label: 'Vote citoyen' },
   { to: '/bug3', label: 'Nos députés' },
+  { to: '/bug4', label: 'Quiz' },
 ]
 
 function SiteHeader() {
