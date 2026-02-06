@@ -1,0 +1,121 @@
+:global(:root) {
+  --offline-ink: #2f3337;
+  --offline-muted: #6c7075;
+}
+
+.page {
+  min-height: 100vh;
+  background: #fcfcfc;
+  color: var(--offline-ink);
+  font-family: 'Segoe UI', Arial, sans-serif;
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+.shell {
+  width: min(1080px, 94vw);
+  padding: 4.5rem 1.5rem 4rem;
+  text-align: center;
+}
+
+.gameHud {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem 1rem;
+  margin-bottom: 1.2rem;
+  font-size: 0.9rem;
+  color: var(--offline-muted);
+  align-items: center;
+}
+
+.score {
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.status {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.72rem;
+}
+
+.dinoScene {
+  position: relative;
+  height: 84px;
+  margin-bottom: 2.2rem;
+  display: flex;
+  justify-content: center;
+  outline: none;
+  width: 100%;
+}
+
+.dino {
+  position: absolute;
+  left: 22%;
+  top: -18px;
+  width: 96px;
+  height: 96px;
+  transform: translateX(-50%);
+  transition: transform 80ms linear;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.ground {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  width: min(860px, 90vw);
+  height: 2px;
+  background: var(--offline-ink);
+  opacity: 0.3;
+  transform: translateX(-50%);
+}
+
+.obstacle {
+  position: absolute;
+  bottom: 8px;
+  left: 0;
+  background-image: url('/images/barbele.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+}
+
+.obstacleAlt {
+  background-image: url('/images/mexic_anim.gif');
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0 0 1rem;
+}
+
+.subtitle {
+  font-size: 1.08rem;
+  color: var(--offline-muted);
+  margin: 0 0 0.9rem;
+}
+
+.list {
+  margin: 0 auto 1.2rem;
+  color: var(--offline-muted);
+  font-size: 1rem;
+  line-height: 1.55;
+  list-style-position: inside;
+}
+
+.list li {
+  margin-bottom: 0.5rem;
+}
+
+.errorCode {
+  font-size: 0.86rem;
+  color: var(--offline-muted);
+  letter-spacing: 0.05em;
+  margin: 1.9rem 0 0;
+}
