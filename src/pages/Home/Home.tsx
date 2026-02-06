@@ -3,7 +3,6 @@ import { Input, Button, Progress } from 'antd';
 import { SearchOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import styles from './Home.module.css';
 
-// Mock Data
 const recentVotes = [
   { id: 1, day: '06', month: 'FEB', title: "Loi sur la transition énergétique", status: 'Adopté', chambre: 'Assemblée' },
   { id: 2, day: '05', month: 'FEB', title: "Amendement budget sécurité sociale", status: 'Rejeté', chambre: 'Sénat' },
@@ -19,7 +18,6 @@ const Home: React.FC = () => {
   return (
     <main style={{ minHeight: '80vh' }}>
       
-      {/* HERO SECTION */}
       <section className={styles.heroSection}>
         <div className={`container ${styles.heroContent}`}>
           <h1 className={styles.heroTitle}>
@@ -44,11 +42,9 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* MAIN CONTENT */}
       <div className="container">
         <div className={styles.mainGrid}>
           
-          {/* GAUCHE : DERNIERS SCRUTINS */}
           <div className={styles.card}>
             <div className={styles.sectionHeader}>
               <h2 className={styles.sectionTitle}>Derniers Scrutins</h2>
@@ -79,7 +75,6 @@ const Home: React.FC = () => {
             </div>
           </div>
 
-          {/* DROITE : SONDAGES */}
           <div className={styles.card} style={{ background: 'linear-gradient(180deg, rgba(255,255,255,0.8), rgba(246, 213, 168, 0.2))' }}>
             <div className={styles.sectionHeader}>
               <h2 className={styles.sectionTitle}>Vos Avis</h2>
