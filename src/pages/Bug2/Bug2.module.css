@@ -44,7 +44,7 @@
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 20px 40px rgba(15, 18, 26, 0.1);
+  box-shadow: 0 20px 40px rgba(29, 27, 22, 0.1);
 }
 
 .cardHeader {
@@ -58,7 +58,7 @@
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--accent-cool);
-  background: rgba(142, 166, 255, 0.1);
+  background: rgba(47, 182, 173, 0.12);
   padding: 0.4rem 0.8rem;
   border-radius: 99px;
   margin-bottom: 1rem;
@@ -93,13 +93,14 @@
 .voteButton:hover {
   background: white;
   transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 12px rgba(29, 27, 22, 0.08);
 }
 
 /* Couleurs au survol/active */
 .btnYes:hover { color: #52c41a; border-color: #52c41a; }
-.btnNo:hover { color: #ff4d4f; border-color: #ff4d4f; }
-.btnNeutral:hover { color: #faad14; border-color: #faad14; }
+.btnYes:hover { color: var(--accent-cool); border-color: var(--accent-cool); }
+.btnNo:hover { color: var(--accent-strong); border-color: var(--accent-strong); }
+.btnNeutral:hover { color: var(--accent-soft); border-color: var(--accent-soft); }
 
 /* États une fois voté */
 .results {
@@ -117,6 +118,14 @@
   font-size: 0.85rem;
   margin-bottom: 0.3rem;
   color: var(--ink-strong);
+}
+
+.voteNotice {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-style: italic;
+  color: var(--ink-muted);
+  font-size: 1.2rem;
 }
 
 @keyframes fadeIn {

@@ -1,18 +1,19 @@
 import { useEffect, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
-import { Button, Drawer } from 'antd'
+import { Button, Drawer, Modal } from 'antd'
 import { ArrowRightOutlined, MenuOutlined } from '@ant-design/icons'
 import styles from './SiteHeader.module.css'
 
 const navLinks = [
-  { to: '/', label: 'Home', end: true },
-  { to: '/about', label: 'About' },
-  { to: '/contact', label: 'Contact' },
+  { to: '/', label: 'Accueil', end: true },
+  { to: '/bug1', label: 'Avis' },
+  { to: '/bug2', label: 'Vote citoyen' },
 ]
 
 function SiteHeader() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [redirectModals, setRedirectModals] = useState(0)
   const navigate = useNavigate()
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 12)
@@ -28,7 +29,11 @@ function SiteHeader() {
     <header className={`${styles.header} ${isScrolled ? styles.scrolled : ''}`}>
       <div className={`container ${styles.inner}`}>
         <NavLink to="/" className={styles.brand} aria-label="Civis home">
-          <span className={styles.brandMark}>C</span>
+          <img
+            className={styles.brandLogo}
+            src="/images/logo.png"
+            alt="Civis"
+          />
           <span className={styles.brandName}>Civis</span>
         </NavLink>
         <nav className={styles.nav} aria-label="Primary">
@@ -47,9 +52,9 @@ function SiteHeader() {
           <Button
             className={styles.ctaButton}
             size="large"
-            onClick={() => navigate('/contact')}
+            onClick={() => setRedirectModals(1)}
           >
-            Request access
+            Nous contacter
             <ArrowRightOutlined />
           </Button>
           <Button
@@ -111,6 +116,25 @@ function SiteHeader() {
           </p>
         </div>
       </Drawer>
+      {Array.from({ length: redirectModals }).map((_, index) => (
+        <Modal
+          key={`redirect-modal-${index}`}
+          centered
+          open
+          className={styles.redirectModal}
+          title="Redirection"
+          okText="OK"
+          cancelButtonProps={{ style: { display: 'none' } }}
+          maskClosable={false}
+          keyboard={false}
+          onOk={() => setRedirectModals((count) => count + 1)}
+          onCancel={() =>
+            setRedirectModals((count) => (count > 0 ? count - 1 : 0))
+          }
+        >
+          Vous allez etre redirige vers la page de contact.
+        </Modal>
+      ))}
       <div className={styles.glow} aria-hidden="true" />
     </header>
   )

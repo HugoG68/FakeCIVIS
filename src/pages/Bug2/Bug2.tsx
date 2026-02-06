@@ -112,7 +112,7 @@ const Polls: React.FC = () => {
         <h1 className={styles.title}>Les Grands Débats de la Nation</h1>
         <p className={styles.subtitle}>
           Parce que la démocratie, c'est aussi décider des choses qui fâchent vraiment.
-          Exprimez-vous en toute âme et conscience.
+          Exprimez-vous en toute conscience.
         </p>
       </header>
 
@@ -162,7 +162,12 @@ const Polls: React.FC = () => {
                       <span>Pour</span>
                       <span>{getPercent(poll.votes.yes, totalVotes)}%</span>
                     </div>
-                    <Progress percent={getPercent(poll.votes.yes, totalVotes)} showInfo={false} strokeColor="#52c41a" size="small" />
+                    <Progress
+                      percent={getPercent(poll.votes.yes, totalVotes)}
+                      showInfo={false}
+                      strokeColor="var(--accent-cool)"
+                      size="small"
+                    />
                   </div>
 
                   <div className={styles.resultRow}>
@@ -170,7 +175,12 @@ const Polls: React.FC = () => {
                       <span>Contre</span>
                       <span>{getPercent(poll.votes.no, totalVotes)}%</span>
                     </div>
-                    <Progress percent={getPercent(poll.votes.no, totalVotes)} showInfo={false} strokeColor="#ff4d4f" size="small" />
+                    <Progress
+                      percent={getPercent(poll.votes.no, totalVotes)}
+                      showInfo={false}
+                      strokeColor="var(--accent-strong)"
+                      size="small"
+                    />
                   </div>
 
                   <div className={styles.resultRow}>
@@ -178,10 +188,15 @@ const Polls: React.FC = () => {
                       <span>Sans avis (les lâches)</span>
                       <span>{getPercent(poll.votes.neutral, totalVotes)}%</span>
                     </div>
-                    <Progress percent={getPercent(poll.votes.neutral, totalVotes)} showInfo={false} strokeColor="#faad14" size="small" />
+                    <Progress
+                      percent={getPercent(poll.votes.neutral, totalVotes)}
+                      showInfo={false}
+                      strokeColor="var(--accent-soft)"
+                      size="small"
+                    />
                   </div>
 
-                  <div style={{ marginTop: '1.5rem', textAlign: 'center', fontStyle: 'italic', color: 'var(--ink-muted)', fontSize: '0.9rem' }}>
+                  <div className={styles.voteNotice}>
                     Votre vote <strong>{poll.userChoice === 'YES' ? 'POUR' : poll.userChoice === 'NO' ? 'CONTRE' : 'NEUTRE'}</strong> a été comptabilisé.
                   </div>
                 </div>
