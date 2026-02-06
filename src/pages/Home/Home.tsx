@@ -1,5 +1,5 @@
-import React from 'react';
-import { Input, Button, Progress } from 'antd';
+import React, { useState } from 'react';
+import { Input, Button } from 'antd';
 import { SearchOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import styles from './Home.module.css';
 
@@ -9,12 +9,14 @@ const recentVotes = [
   { id: 3, day: '03', month: 'FEB', title: "Protection des données numériques", status: 'Adopté', chambre: 'Assemblée' },
 ];
 
-const polls = [
-  { id: 1, question: "Faut-il interdire les trottinettes en libre service ?", votes: 1250, pour: 70 },
-  { id: 2, question: "Priorité aux commerces de proximité ?", votes: 3400, pour: 45 },
-];
+// URLs des photos (Directement depuis NosDeputes.fr)
+const BOYARD_IMG = "https://www.nosdeputes.fr/depute/photo/louis-boyard/150";
+const ATTAL_IMG = "https://www.nosdeputes.fr/depute/photo/gabriel-attal/150";
 
 const Home: React.FC = () => {
+  // État pour savoir si la souris est sur l'image
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <main style={{ minHeight: '80vh' }}>
       
@@ -45,6 +47,7 @@ const Home: React.FC = () => {
       <div className="container">
         <div className={styles.mainGrid}>
           
+          {/* COLONNE GAUCHE (Scrutins) */}
           <div className={styles.card}>
             <div className={styles.sectionHeader}>
               <h2 className={styles.sectionTitle}>Derniers Scrutins</h2>
@@ -75,35 +78,30 @@ const Home: React.FC = () => {
             </div>
           </div>
 
-          <div className={styles.card} style={{ background: 'linear-gradient(180deg, rgba(255,255,255,0.8), rgba(246, 213, 168, 0.2))' }}>
-            <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>Vos Avis</h2>
-            </div>
+          <div>
             
-            {polls.map(poll => (
-              <div key={poll.id} className={styles.pollItem}>
-                <span className={styles.pollQuestion}>{poll.question}</span>
-                <Progress 
-                  percent={poll.pour} 
-                  strokeColor={{ '0%': 'var(--accent-strong)', '100%': 'var(--accent-cool)' }} 
-                  trailColor="rgba(15, 18, 26, 0.06)"
-                  showInfo={false}
-                  size="small"
-                />
-                <div className={styles.pollStats}>
-                  <span>{poll.pour}% Favorables</span>
-                  <span>{poll.votes} votes</span>
-                </div>
+            <div className={`${styles.card} ${styles.deputyDayCard}`}>
+              <div className={styles.sectionHeader} style={{ justifyContent: 'center', border: 'none', marginBottom: 0 }}>
+                <h2 className={styles.sectionTitle}>Député du Jour</h2>
               </div>
-            ))}
+              
+              <img
+                src={isHovered ? ATTAL_IMG : BOYARD_IMG}
+                alt="Député du jour"
+                className={`${styles.deputyPhoto} ${isHovered ? styles.bugEffect : ''}`}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+              />
 
-            <div style={{ marginTop: '2rem', textAlign: 'center' }}>
-              <Button size="large" className={styles.searchButton} style={{ width: '100%' }}>
-                Participer aux débats
-              </Button>
+              <h3 className={styles.deputyName}>
+                Louis Boyard
+              </h3>
+              <span className={styles.deputyRole}>
+                La France Insoumise
+              </span>
             </div>
-          </div>
 
+          </div>
         </div>
       </div>
     </main>
