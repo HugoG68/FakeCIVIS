@@ -46,6 +46,15 @@
   box-shadow: 0 16px 30px rgba(255, 107, 74, 0.35);
 }
 
+.brandLogo {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 1.1rem;
+  object-fit: cover;
+  display: block;
+  box-shadow: 0 16px 30px rgba(255, 107, 74, 0.25);
+}
+
 .brandName {
   margin: 0 0 0.2rem;
   font-family: var(--font-display);

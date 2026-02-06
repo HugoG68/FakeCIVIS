@@ -14,7 +14,11 @@ function SiteFooter() {
       <div className="container">
         <div className={styles.topBar}>
           <div className={styles.brandBlock}>
-            <span className={styles.brandMark}>C</span>
+            <img
+              className={styles.brandLogo}
+              src="/images/logo.png"
+              alt="Civis"
+            />
             <div>
               <p className={styles.brandName}>Civis</p>
               <p className={styles.tagline}>

@@ -73,8 +73,8 @@ const deputies = [
 ]
 
 const defaultInfos = [
-  'Depute a l\'Assemblee nationale',
-  'Legislature en cours'
+  'Nos députés à l\'Assemblée nationale',
+  'Législature en cours'
 ]
 
 function Bug3() {
@@ -134,10 +134,10 @@ function Bug3() {
   return (
     <div className={styles.page} ref={pageRef}>
       <header className={styles.header}>
-        <h1 className={styles.title}>Deputes francais</h1>
+        <h1 className={styles.title}>Députés français</h1>
         <p className={styles.subtitle}>
-          Une selection de deputes avec leur photo, leur nom et quelques
-          informations publiques. Mets a jour la liste si un profil manque.
+          Une sélection de députés avec leur photo, leur nom et quelques
+          informations publiques. Mets à jour la liste si un profil manque.
         </p>
       </header>
 
