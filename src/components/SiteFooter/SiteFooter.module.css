@@ -1,0 +1,31 @@
+.footer {
+  padding: 3rem 0 4rem;
+  border-top: 1px solid rgba(16, 18, 23, 0.08);
+  background: rgba(250, 247, 242, 0.6);
+}
+
+.inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  margin: 0 0 0.4rem;
+}
+
+.tagline {
+  margin: 0;
+  color: var(--color-ink-muted);
+}
+
+.meta {
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+  color: var(--color-ink-muted);
+}

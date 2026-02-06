@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;600&display=swap');
+@import './tokens.css';
+@import './utilities.css';
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  background: radial-gradient(circle at top left, rgba(231, 178, 69, 0.2), transparent 45%),
+    radial-gradient(circle at 30% 60%, rgba(16, 18, 23, 0.08), transparent 50%),
+    #fdfbf7;
+  min-height: 100vh;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  margin: 0 0 1rem;
+}
+
+p {
+  line-height: 1.6;
+}
