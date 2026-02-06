@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Button, Progress, message } from 'antd';
+import React, { useEffect, useMemo, useState } from 'react';
+import { Button, Form, Input, Modal, Progress, Select, message } from 'antd';
 import { LikeOutlined, DislikeOutlined, MehOutlined, CheckCircleFilled } from '@ant-design/icons';
 import styles from './Bug2.module.css';
 
@@ -60,6 +60,9 @@ const initialPolls: Poll[] = [
 const Polls: React.FC = () => {
   const [polls, setPolls] = useState<Poll[]>(initialPolls);
   const [messageApi, contextHolder] = message.useMessage();
+  const [debateOpen, setDebateOpen] = useState(false);
+  const [glitchPulse, setGlitchPulse] = useState(false);
+  const [fieldOrder, setFieldOrder] = useState<string[]>([]);
 
   const handleVote = (id: number, type: 'YES' | 'NO' | 'NEUTRAL') => {
     
@@ -102,7 +105,59 @@ const Polls: React.FC = () => {
     });
   };
 
+  const debateCategories = [
+    'Democratie & participation citoyenne',
+    'Logement & urbanisme',
+    'Environnement & transition ecologique',
+    'Travail & economie',
+    'Societe & culture',
+    'Technologie & innovation'
+  ];
+
+  const debateFields = useMemo(
+    () => [
+      { key: 'title', label: 'Titre du debat' },
+      { key: 'category', label: 'Categorie' },
+      { key: 'context', label: 'Contexte' },
+      { key: 'urgency', label: 'Urgence' },
+      { key: 'scope', label: 'Zone concernee' }
+    ],
+    []
+  );
+
   const getPercent = (val: number, total: number) => total === 0 ? 0 : Math.round((val / total) * 100);
+
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (prefersReducedMotion.matches) return;
+
+    const intervalId = window.setInterval(() => {
+      setGlitchPulse(true);
+      window.setTimeout(() => setGlitchPulse(false), 420);
+    }, 1800);
+
+    return () => window.clearInterval(intervalId);
+  }, []);
+
+  useEffect(() => {
+    if (!debateOpen) return;
+    setFieldOrder(debateFields.map((field) => field.key));
+
+    const shuffle = (list: string[]) => {
+      const next = [...list];
+      for (let i = next.length - 1; i > 0; i -= 1) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [next[i], next[j]] = [next[j], next[i]];
+      }
+      return next;
+    };
+
+    const intervalId = window.setInterval(() => {
+      setFieldOrder((prev) => shuffle(prev));
+    }, 2600);
+
+    return () => window.clearInterval(intervalId);
+  }, [debateFields, debateOpen]);
 
   return (
     <div className={styles.container}>
@@ -114,6 +169,13 @@ const Polls: React.FC = () => {
           Parce que la démocratie, c'est aussi décider des choses qui fâchent vraiment.
           Exprimez-vous en toute conscience.
         </p>
+        <Button
+          className={styles.debateButton}
+          size="large"
+          onClick={() => setDebateOpen(true)}
+        >
+          Créer un débat
+        </Button>
       </header>
 
       <div className={styles.grid}>
@@ -205,6 +267,105 @@ const Polls: React.FC = () => {
           );
         })}
       </div>
+
+      <Modal
+        open={debateOpen}
+        centered
+        onCancel={() => setDebateOpen(false)}
+        footer={null}
+        className={styles.debateModal}
+        title="Créer un débat"
+      >
+        <Form
+          layout="vertical"
+          className={`${styles.debateForm} ${glitchPulse ? styles.debateFormGlitch : ''}`}
+          onFinish={() => {
+            messageApi.success('Debat enregistre. Merci pour votre proposition.');
+            setDebateOpen(false);
+          }}
+        >
+          {(fieldOrder.length ? fieldOrder : debateFields.map((field) => field.key)).map((fieldKey) => {
+            switch (fieldKey) {
+              case 'title':
+                return (
+                  <Form.Item
+                    key={fieldKey}
+                    label="Titre du debat"
+                    name="debateTitle"
+                    rules={[{ required: true }]}
+                  >
+                    <Input placeholder="Ex: Faut-il limiter les locations courte duree ?" />
+                  </Form.Item>
+                );
+              case 'category':
+                return (
+                  <Form.Item
+                    key={fieldKey}
+                    label="Categorie"
+                    name="category"
+                    rules={[{ required: true }]}
+                  >
+                    <Select placeholder="Choisir une categorie">
+                      {debateCategories.map((option) => (
+                        <Select.Option key={option} value={option}>
+                          {option}
+                        </Select.Option>
+                      ))}
+                    </Select>
+                  </Form.Item>
+                );
+              case 'context':
+                return (
+                  <Form.Item
+                    key={fieldKey}
+                    label="Contexte"
+                    name="context"
+                    rules={[{ required: true }]}
+                  >
+                    <Input.TextArea rows={3} placeholder="Donne un peu de contexte." />
+                  </Form.Item>
+                );
+              case 'urgency':
+                return (
+                  <Form.Item
+                    key={fieldKey}
+                    label="Urgence"
+                    name="urgency"
+                    rules={[{ required: true }]}
+                  >
+                    <Select placeholder="Choisir un niveau">
+                      <Select.Option value="low">Faible</Select.Option>
+                      <Select.Option value="medium">Moyenne</Select.Option>
+                      <Select.Option value="high">Elevee</Select.Option>
+                    </Select>
+                  </Form.Item>
+                );
+              case 'scope':
+                return (
+                  <Form.Item
+                    key={fieldKey}
+                    label="Zone concernee"
+                    name="scope"
+                    rules={[{ required: true }]}
+                  >
+                    <Select placeholder="Choisir une zone">
+                      <Select.Option value="local">Locale</Select.Option>
+                      <Select.Option value="regional">Regionale</Select.Option>
+                      <Select.Option value="national">Nationale</Select.Option>
+                    </Select>
+                  </Form.Item>
+                );
+              default:
+                return null;
+            }
+          })}
+          <Form.Item>
+            <Button className={styles.debateSubmit} htmlType="submit" size="large">
+              Publier le debat
+            </Button>
+          </Form.Item>
+        </Form>
+      </Modal>
     </div>
   );
 };
