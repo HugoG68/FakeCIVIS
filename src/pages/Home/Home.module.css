@@ -296,3 +296,74 @@
   margin: 0;
   color: var(--ink-strong);
 }
+
+.loaderOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--canvas);
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Courier New', monospace;
+}
+
+.loaderContent {
+  text-align: center;
+  width: 300px;
+}
+
+.loaderSpinner {
+  width: 60px;
+  height: 60px;
+  border: 5px solid var(--line-soft);
+  border-top-color: var(--accent-strong);
+  border-radius: 50%;
+  margin: 0 auto 2rem;
+  animation: spin 1s linear infinite; 
+  transition: border-top-color 0.3s ease;
+}
+
+.spinnerRed {
+  border-top-color: #ff4d4f;
+}
+
+.progressBarContainer {
+  width: 100%;
+  height: 12px;
+  background: rgba(0,0,0,0.05);
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--line-soft);
+}
+
+.progressBarFill {
+  height: 100%;
+  background: var(--accent-strong);
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
+}
+
+.barRed {
+  background: #ff4d4f !important;
+}
+
+.percentDisplay {
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--ink-strong);
+  margin-top: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.textRed {
+  color: #ff4d4f;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

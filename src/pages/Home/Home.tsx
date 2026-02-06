@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Input, Button } from 'antd';
 import { SearchOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import styles from './Home.module.css';
@@ -9,17 +9,77 @@ const recentVotes = [
   { id: 3, day: '03', month: 'FEB', title: "Protection des données numériques", status: 'Adopté', chambre: 'Assemblée' },
 ];
 
-// URLs des photos (Directement depuis NosDeputes.fr)
 const BOYARD_IMG = "https://www.nosdeputes.fr/depute/photo/louis-boyard/150";
 const ATTAL_IMG = "https://www.nosdeputes.fr/depute/photo/gabriel-attal/150";
 
 const Home: React.FC = () => {
-  // État pour savoir si la souris est sur l'image
   const [isHovered, setIsHovered] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [progress, setProgress] = useState(0);
+  const [isDropping, setIsDropping] = useState(false);
+
+  useEffect(() => {
+    const hasVisited = sessionStorage.getItem('civis_visited');
+    if (hasVisited) {
+      setIsLoading(false);
+      return;
+    }
+
+    const timeline = [
+      { time: 0, pct: 0, drop: false },
+      { time: 800, pct: 20, drop: false },
+      { time: 1500, pct: 45, drop: false },
+      { time: 2200, pct: 70, drop: false },
+      { time: 2800, pct: 85, drop: false },
+      { time: 3500, pct: 99, drop: false },
+      { time: 4500, pct: 12, drop: true },
+      { time: 5000, pct: 15, drop: true },
+      { time: 5500, pct: 15, drop: true },
+      { time: 6000, pct: 42, drop: true },
+      { time: 6200, pct: 38, drop: true },
+      { time: 7000, pct: 60, drop: true },
+      { time: 7500, pct: 55, drop: true },
+      { time: 8500, pct: 90, drop: false },
+      { time: 9500, pct: 99, drop: false },
+      { time: 10500, pct: 100, drop: false },
+    ];
+
+    timeline.forEach(step => {
+      setTimeout(() => {
+        setProgress(step.pct);
+        setIsDropping(step.drop);
+      }, step.time);
+    });
+
+    setTimeout(() => {
+      setIsLoading(false);
+      sessionStorage.setItem('civis_visited', 'true');
+    }, 11000);
+
+  }, []);
 
   return (
     <main style={{ minHeight: '80vh' }}>
-      
+
+      {isLoading && (
+        <div className={styles.loaderOverlay}>
+          <div className={styles.loaderContent}>
+            <div className={`${styles.loaderSpinner} ${isDropping ? styles.spinnerRed : ''}`} />
+
+            <div className={styles.progressBarContainer}>
+              <div
+                className={`${styles.progressBarFill} ${isDropping ? styles.barRed : ''}`}
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+
+            <div className={`${styles.percentDisplay} ${isDropping ? styles.textRed : ''}`}>
+              {progress}%
+            </div>
+          </div>
+        </div>
+      )}
+
       <section className={styles.heroSection}>
         <div className={`container ${styles.heroContent}`}>
           <h1 className={styles.heroTitle}>
