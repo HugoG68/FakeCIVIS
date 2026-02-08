@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
-import { Button, Drawer, Modal } from 'antd'
+import { Button, Drawer, Modal, Switch } from 'antd'
 import { ArrowRightOutlined, MenuOutlined } from '@ant-design/icons'
+import { useTheme } from '../../contexts/ThemeContext'
 import styles from './SiteHeader.module.css'
 
 const navLinks = [
@@ -17,6 +18,7 @@ function SiteHeader() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [redirectModals, setRedirectModals] = useState(0)
   const navigate = useNavigate()
+  const { isDarkMode, toggleDarkMode } = useTheme()
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 12)
     handleScroll()
@@ -51,6 +53,14 @@ function SiteHeader() {
           ))}
         </nav>
         <div className={styles.actions}>
+          <div className={styles.themeToggle}>
+            <span className={styles.themeLabel}>🌙</span>
+            <Switch
+              checked={isDarkMode}
+              onChange={toggleDarkMode}
+              className={styles.darkModeSwitch}
+            />
+          </div>
           <Button
             className={styles.ctaButton}
             size="large"

@@ -5,6 +5,7 @@ import Bug1 from '../pages/Bug1/Bug1'
 import Bug2 from '../pages/Bug2/Bug2'
 import Bug3 from '../pages/Bug3/Bug3'
 import Bug4 from '../pages/Bug4/Bug4'
+import Bug5 from '../pages/Bug5/Bug5'
 
 const router = createBrowserRouter([
   { path: '/bug1', element: <Bug1 /> },
@@ -15,7 +16,8 @@ const router = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: '/bug2', element: <Bug2 /> },
       { path: '/bug3', element: <Bug3 /> },
-      { path: '/bug4', element: <Bug4 /> }
+      { path: '/bug4', element: <Bug4 /> },
+      { path: '/bug5', element: <Bug5 /> }
     ],
   },
 ])

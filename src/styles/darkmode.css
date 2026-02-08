@@ -1,0 +1,164 @@
+:root.dark-mode {
+  --ink-strong: #e8e6e1;
+  --ink-muted: #a4a7a2;
+  --canvas: #1a1816;
+  --glass-bg: rgba(26, 24, 22, 0.7);
+  --glass-strong: rgba(10, 10, 10, 0.86);
+  --line-soft: rgba(232, 230, 225, 0.08);
+
+  --accent-strong: #ff0000;
+  --accent-soft: #ff6666;
+  --accent-cool: #00ff00;
+}
+
+:root.dark-mode body {
+  background: #0a0a0a;
+  color: #e8e6e1;
+}
+
+:root.dark-mode h1,
+:root.dark-mode h2,
+:root.dark-mode h3 {
+  position: relative;
+  animation: textGlitch 0.3s infinite;
+}
+
+@keyframes textGlitch {
+  0% {
+    text-shadow: 2px 0 #ff0000, -2px 0 #00ff00;
+  }
+  25% {
+    text-shadow: -2px 0 #ff0000, 2px 0 #00ff00;
+  }
+  50% {
+    text-shadow: 2px 0 #00ff00, -2px 0 #ff0000;
+  }
+  75% {
+    text-shadow: -2px 0 #00ff00, 2px 0 #ff0000;
+  }
+  100% {
+    text-shadow: 2px 0 #ff0000, -2px 0 #00ff00;
+  }
+}
+
+:root.dark-mode img {
+  filter: hue-rotate(180deg) saturate(1.5) contrast(1.2);
+  animation: imageCorrupt 2s infinite;
+}
+
+@keyframes imageCorrupt {
+  0%, 100% {
+    filter: hue-rotate(180deg) saturate(1.5) contrast(1.2);
+  }
+  50% {
+    filter: hue-rotate(200deg) saturate(2) contrast(1.5) brightness(0.8);
+  }
+}
+
+:root.dark-mode::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9997;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  animation: scanlines 0.5s linear infinite;
+}
+
+@keyframes scanlines {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(2px);
+  }
+}
+
+:root.dark-mode .ant-btn,
+:root.dark-mode button {
+  border: 2px solid #ff0000 !important;
+  animation: borderBlink 1s infinite;
+}
+
+@keyframes borderBlink {
+  0%, 100% {
+    border-color: #ff0000 !important;
+    box-shadow: 0 0 10px #ff0000;
+  }
+  50% {
+    border-color: #00ff00 !important;
+    box-shadow: 0 0 10px #00ff00;
+  }
+}
+
+:root.dark-mode [class*="card"],
+:root.dark-mode [class*="Card"] {
+  background: #1a1816 !important;
+  border: 2px solid #ff0000 !important;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.5) !important;
+}
+
+:root.dark-mode p,
+:root.dark-mode span {
+  animation: textShake 0.5s infinite;
+}
+
+@keyframes textShake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-1px) translateY(1px);
+  }
+  50% {
+    transform: translateX(1px) translateY(-1px);
+  }
+  75% {
+    transform: translateX(-1px) translateY(-1px);
+  }
+}
+
+:root.dark-mode input,
+:root.dark-mode textarea {
+  background: #0a0a0a !important;
+  color: #00ff00 !important;
+  border: 2px solid #ff0000 !important;
+  font-family: 'Courier New', monospace !important;
+}
+
+:root.dark-mode a {
+  color: #ff0000 !important;
+  text-decoration: underline wavy #00ff00 !important;
+  animation: linkDistort 1s infinite;
+}
+
+@keyframes linkDistort {
+  0%, 100% {
+    transform: skewX(0deg);
+  }
+  50% {
+    transform: skewX(2deg);
+  }
+}
+
+:root.dark-mode {
+  cursor: crosshair;
+}
+
+:root.dark-mode::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9996;
+  background-image:
+    repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255, 0, 0, 0.03) 2px, rgba(255, 0, 0, 0.03) 4px),
+    repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 0, 0.03) 2px, rgba(0, 255, 0, 0.03) 4px);
+  opacity: 0.3;
+  pointer-events: none;
+}

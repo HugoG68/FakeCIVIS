@@ -1,0 +1,58 @@
+.errorMessage {
+  position: fixed;
+  z-index: 9999;
+  padding: 0.75rem 1.25rem;
+  background: rgba(255, 0, 0, 0.9);
+  color: #fff;
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  font-weight: bold;
+  border: 2px solid #ff0000;
+  border-radius: 4px;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+  animation: errorFadeIn 0.5s ease-out, errorFloat 3s ease-in-out;
+  pointer-events: none;
+}
+
+@keyframes errorFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes errorFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.glitchOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: linear-gradient(
+    rgba(255, 0, 0, 0.1) 50%,
+    rgba(0, 255, 0, 0.1) 50%
+  );
+  background-size: 100% 4px;
+  opacity: 0.3;
+  pointer-events: none;
+  animation: glitchScan 0.2s steps(1);
+}
+
+@keyframes glitchScan {
+  0% { transform: translateY(0); }
+  20% { transform: translateY(-5px); }
+  40% { transform: translateY(5px); }
+  60% { transform: translateY(-3px); }
+  80% { transform: translateY(3px); }
+  100% { transform: translateY(0); }
+}
