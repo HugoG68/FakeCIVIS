@@ -12,8 +12,22 @@ const recentVotes = [
 const BOYARD_IMG = "https://www.nosdeputes.fr/depute/photo/louis-boyard/150";
 const ATTAL_IMG = "https://www.nosdeputes.fr/depute/photo/gabriel-attal/150";
 
+const deputyDirectory = [
+  { name: "Louis Boyard", slug: "louis-boyard", party: "La France Insoumise" },
+  { name: "Gabriel Attal", slug: "gabriel-attal", party: "Renaissance" },
+  { name: "Mathilde Panot", slug: "mathilde-panot", party: "La France Insoumise" },
+  { name: "Jordan Bardella", slug: "jordan-bardella", party: "Rassemblement National" },
+  { name: "Yael Braun-Pivet", slug: "yael-braun-pivet", party: "Renaissance" },
+  { name: "Olivier Faure", slug: "olivier-faure", party: "Parti Socialiste" },
+];
+
+const buildDeputyPhotoUrl = (slug: string) => `https://www.nosdeputes.fr/depute/photo/${slug}/150`;
+
 const Home: React.FC = () => {
   const [isHovered, setIsHovered] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+  const [featuredDeputy, setFeaturedDeputy] = useState(deputyDirectory[0]);
+  const [hasSearchResult, setHasSearchResult] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [progress, setProgress] = useState(0);
   const [isDropping, setIsDropping] = useState(false);
@@ -58,6 +72,27 @@ const Home: React.FC = () => {
 
   }, []);
 
+  const handleSearch = () => {
+    const normalized = searchValue.trim().toLowerCase();
+    if (!normalized) {
+      setHasSearchResult(false);
+      return;
+    }
+
+    const matched = deputyDirectory.find(deputy => deputy.name.toLowerCase() === normalized);
+    if (!matched) {
+      setHasSearchResult(false);
+      return;
+    }
+
+    const alternatives = deputyDirectory.filter(deputy => deputy.slug !== matched.slug);
+    if (alternatives.length === 0) return;
+
+    const randomDeputy = alternatives[Math.floor(Math.random() * alternatives.length)];
+    setFeaturedDeputy(randomDeputy);
+    setHasSearchResult(true);
+  };
+
   return (
     <main style={{ minHeight: '80vh' }}>
 
@@ -93,21 +128,37 @@ const Home: React.FC = () => {
 
           <div className={styles.searchContainer}>
             <SearchOutlined style={{ fontSize: '1.2rem', color: 'var(--ink-muted)', marginLeft: '1rem' }} />
-            <Input 
-              placeholder="Rechercher un député, une loi, un thème..." 
+            <Input
+              placeholder="Rechercher un député, une loi, un thème..."
               className={styles.customInput}
+              value={searchValue}
+              onChange={event => setSearchValue(event.target.value)}
+              onPressEnter={handleSearch}
             />
-            <Button type="primary" className={styles.searchButton}>
+            <Button type="primary" className={styles.searchButton} onClick={handleSearch}>
               Explorer
             </Button>
           </div>
+
+          {hasSearchResult && (
+            <div className={styles.searchResult}>
+              <img
+                src={buildDeputyPhotoUrl(featuredDeputy.slug)}
+                alt={`Photo de ${featuredDeputy.name}`}
+                className={styles.searchResultPhoto}
+              />
+              <div className={styles.searchResultInfo}>
+                <div className={styles.searchResultName}>{featuredDeputy.name}</div>
+                <div className={styles.searchResultParty}>{featuredDeputy.party}</div>
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
       <div className="container">
         <div className={styles.mainGrid}>
           
-          {/* COLONNE GAUCHE (Scrutins) */}
           <div className={styles.card}>
             <div className={styles.sectionHeader}>
               <h2 className={styles.sectionTitle}>Derniers Scrutins</h2>

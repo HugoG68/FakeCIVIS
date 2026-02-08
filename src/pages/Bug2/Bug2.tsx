@@ -2,14 +2,12 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Button, Form, Input, Modal, Progress, Select, message } from 'antd';
 import { LikeOutlined, DislikeOutlined, MehOutlined, CheckCircleFilled } from '@ant-design/icons';
 import styles from './Bug2.module.css';
-
-// --- TYPES ---
 interface Poll {
   id: number;
   category: string;
   question: string;
   votes: { yes: number; no: number; neutral: number };
-  userChoice: 'YES' | 'NO' | 'NEUTRAL' | null; // Pour savoir si l'user a déjà voté
+  userChoice: 'YES' | 'NO' | 'NEUTRAL' | null;
 }
 
 const initialPolls: Poll[] = [

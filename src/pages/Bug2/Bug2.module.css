@@ -113,13 +113,10 @@
   box-shadow: 0 4px 12px rgba(29, 27, 22, 0.08);
 }
 
-/* Couleurs au survol/active */
 .btnYes:hover { color: #52c41a; border-color: #52c41a; }
 .btnYes:hover { color: var(--accent-cool); border-color: var(--accent-cool); }
 .btnNo:hover { color: var(--accent-strong); border-color: var(--accent-strong); }
 .btnNeutral:hover { color: var(--accent-soft); border-color: var(--accent-soft); }
-
-/* États une fois voté */
 .results {
   margin-top: 2rem;
   animation: fadeIn 0.5s ease;

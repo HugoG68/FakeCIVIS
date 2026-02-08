@@ -138,8 +138,6 @@ const Quiz: React.FC = () => {
 
       {!isFinished ? (
         <div key={currentQuestion.id} className={`${styles.questionCard} ${styles.fadeIn}`}>
-          
-          {/* Header de la carte : Progression */}
           <div className={styles.progressHeader}>
             <span className={styles.stepText}>Question en cours</span>
             <span className={styles.stepCount}>
@@ -167,7 +165,6 @@ const Quiz: React.FC = () => {
           </div>
         </div>
       ) : (
-        /* --- ÉCRAN DE FIN --- */
         <div className={`${styles.questionCard} ${styles.fadeIn}`} style={{ textAlign: 'center' }}>
           <div style={{ 
             width: '100px', height: '100px', borderRadius: '50%', 

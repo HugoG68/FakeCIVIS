@@ -16,7 +16,6 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     if (isDarkMode) {
       document.documentElement.classList.add('dark-mode');
 
-      // Effet de glitch périodique quand le dark mode est actif
       const glitchInterval = setInterval(() => {
         setIsGlitching(true);
         setTimeout(() => setIsGlitching(false), 200);
